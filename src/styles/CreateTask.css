@@ -1,0 +1,36 @@
+.create-task {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.create-task textarea {
+  min-height: 80px;
+  resize: none;
+  padding: 0.8rem;
+  border-radius: 10px;
+  border: 1px solid #000000;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.create-task textarea:focus {
+  border-color: #7b5bff;
+  box-shadow: 0 0 0 2px rgba(123,91,255,0.2);
+}
+
+.create-task button {
+  background: #28a745;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  color: #000000;
+  font-weight: bold;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.2s ease;
+}
+.create-task button:hover {
+  background: #218838;
+}

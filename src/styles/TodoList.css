@@ -1,0 +1,19 @@
+/* Contenedor de la lista */
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* espacio entre tareas */
+  margin-top: 0.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+/* Cada elemento de la lista */
+.todo-list li {
+  transition: transform 0.15s ease, opacity 0.2s ease;
+}
+
+.todo-list li:hover {
+  transform: translateX(4px); /* pequeño efecto al pasar el mouse */
+  opacity: 0.95;
+}

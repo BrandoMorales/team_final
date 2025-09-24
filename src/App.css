@@ -1,0 +1,57 @@
+.app-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f9f9f9, #e9e9e9);
+  padding: 2rem;
+  color: #333;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.app-header {
+  max-width: 900px;
+  margin: 0 auto 1.5rem auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-title {
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.app-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logout-button {
+  background: #ff4757;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.logout-button:hover {
+  background: #e84118;
+}
+
+.app-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-bottom: 1rem;
+}
+
+.app-footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #777;
+}

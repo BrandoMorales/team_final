@@ -1,0 +1,271 @@
+/* Reset y fuentes */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body, #root {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #c2e9fb, #a1c4fd);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+/* Contenedor principal */
+.app-container {
+  width: 100%;
+  max-width: 900px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Encabezado */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #4b0082;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.app-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1rem;
+}
+
+.logout-button {
+  background: #ff4757;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.logout-button:hover {
+  background: #e84118;
+}
+
+/* Tarjetas internas */
+.app-card {
+  background: #f9f9f9;
+  border-radius: 14px;
+  padding: 1.2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Footer */
+.app-footer {
+  margin-top: auto;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* ---------- Login ---------- */
+.login-box {
+  text-align: center;
+}
+
+.login-box h2 {
+  font-size: 1.8rem;
+  color: #4b0082;
+  margin-bottom: 0.5rem;
+}
+
+.login-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.login-buttons button {
+  background: #007bff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.login-buttons button:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
+.login-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.login-form input {
+  flex: 1;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.login-form button {
+  background: #28a745;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.login-form button:hover {
+  background: #218838;
+  transform: translateY(-2px);
+}
+
+.login-note {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* ---------- CreateTask ---------- */
+.create-task {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.create-task textarea {
+  min-height: 80px;
+  resize: none;
+  padding: 0.8rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.create-task textarea:focus {
+  border-color: #7b5bff;
+  box-shadow: 0 0 0 2px rgba(123,91,255,0.2);
+}
+
+.create-task button {
+  background: #28a745;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.create-task button:hover {
+  background: #218838;
+  transform: translateY(-2px);
+}
+
+/* ---------- SearchFilter ---------- */
+.search-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.search-filter input,
+.search-filter select {
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  flex: 1;
+}
+
+.search-filter button {
+  background: #eee;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.search-filter button:hover {
+  background: #ddd;
+}
+
+/* ---------- TodoList & TodoItem ---------- */
+.todo-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #fff;
+  padding: 0.8rem;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  transition: transform 0.2s ease;
+}
+
+.todo-item:hover {
+  transform: translateX(4px);
+}
+
+.todo-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+.todo-content {
+  flex: 1;
+}
+
+.todo-author {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.todo-text {
+  margin-bottom: 4px;
+}
+
+.todo-completed {
+  text-decoration: line-through;
+  color: #777;
+}
+
+.todo-date {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.todo-delete {
+  background: #ffb3b3;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #a00;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.todo-delete:hover {
+  background: #ff8c8c;
+  transform: scale(1.05);
+}
