@@ -1,41 +1,42 @@
-import { useState } from "react";
 
-export default function Login({ onLogin }) {
+import React, { useState } from "react";
+
+export default function Login({ onLogin, onShowRegister }) {
   const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+
 
   function submit(e) {
     e.preventDefault();
     const trimmed = name.trim();
-    if (!trimmed) return alert("Escribe un nombre de usuario (ej: Alice o Bob)");
+    if (!trimmed || !password) return alert("Escribe usuario y contraseña");
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
+    const user = users.find(u => u.name === trimmed && u.password === password);
+    if (!user) return alert("Usuario o contraseña incorrectos");
     onLogin({ name: trimmed });
   }
 
-  function quick(user) {
-    onLogin({ name: user });
-  }
 
   return (
     <div className="login-box">
       <h2>Iniciar sesión</h2>
-      <p>Selecciona uno de los usuarios rápidos o escribe tu nombre.</p>
-
-      <div className="login-buttons">
-        <button onClick={() => quick("Alice")}>Alice</button>
-        <button onClick={() => quick("Bob")}>Bob</button>
-      </div>
-
       <form onSubmit={submit} className="login-form">
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Tu nombre"
+          placeholder="Nombre de usuario"
+        />
+        <input
+          type="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          placeholder="Contraseña"
         />
         <button>Entrar</button>
       </form>
-
-      <p className="login-note">
-        Nota: este login es simple para el ejercicio — no hay autenticación real.
-      </p>
+      <button className="register-link" onClick={onShowRegister}>
+        ¿No tienes cuenta? Regístrate aquí
+      </button>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Login from './componentes/Login'
+import Register from './componentes/Register'
 import CreateTask from './componentes/CreateTask'
 import SearchFilter from './componentes/SearchFilter'
 import TodoList from './componentes/TodoList'
@@ -9,6 +10,7 @@ const STORAGE_KEY = 'team-todo-tasks-v1'
 
 function App() {
   const [user, setUser] = useState(null)
+  const [showRegister, setShowRegister] = useState(false)
   const [tasks, setTasks] = useState([])
   const [loading, setLoading] = useState(true)
   const [query, setQuery] = useState('')
@@ -85,7 +87,14 @@ function App() {
 
       {!user ? (
         <div className="app-card">
-          <Login onLogin={setUser} />
+          {showRegister ? (
+            <Register 
+              onRegister={(u) => { setUser(u); setShowRegister(false); }} 
+              onBack={() => setShowRegister(false)}
+            />
+          ) : (
+            <Login onLogin={setUser} onShowRegister={() => setShowRegister(true)} />
+          )}
         </div>
       ) : (
         <>
