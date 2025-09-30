@@ -1,16 +1,42 @@
-# React + Vite
+# 📌 Buscador Interactivo de Usuarios
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es un **buscador dinámico de usuarios** desarrollado con **React 19**, **Vite** y **TailwindCSS**.  
+Permite al usuario **buscar y filtrar información en tiempo real** obtenida desde un **servidor simulado con JSON Server**.  
+El objetivo principal es practicar conceptos de React como **hooks, estados, consumo de API y manejo de errores**.
 
-Currently, two official plugins are available:
+## 📚 Fuentes consultadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Documentación oficial de React](https://react.dev/)  
+- [Guía de Vite](https://vitejs.dev/guide/)  
+- [TailwindCSS Documentation](https://tailwindcss.com/docs)  
+- [Axios Documentation](https://axios-http.com/docs/intro)  
+- [JSON Server GitHub](https://github.com/typicode/json-server)  
+- [MDN Web Docs – JavaScript](https://developer.mozilla.org/es/)  
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 👨‍💻 Tecnologías utilizadas
 
-## Expanding the ESLint configuration
+- **React 19** → Librería de JavaScript para construir interfaces de usuario.  
+- **Vite** → Herramienta de construcción y servidor de desarrollo rápido.  
+- **TailwindCSS** → Framework CSS utilitario para diseño responsivo y rápido.  
+- **Axios** → Cliente HTTP para consumir APIs.  
+- **JSON Server** → Servidor rápido para simular un backend con una base de datos en formato JSON.  
+- **JavaScript (ES6+)** → Lenguaje de programación principal.  
+- **HTML5 y CSS3** → Base para la estructura y estilos del proyecto.  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🚀 Características principales
+
+- 🔎 **Búsqueda dinámica** en tiempo real (filtra mientras escribes).  
+- ⚡ **Consumo de API** con **Axios**.  
+- 🗂️ **Arquitectura organizada** con componentes reutilizables.  
+- 🖥️ **Simulación de backend** usando **JSON Server**.  
+- ⏳ Manejo de **estados de carga y error** para mejorar la experiencia del usuario.  
+- ⚛️ Uso de **React Hooks** (`useState`, `useEffect`).  
+
+---
+
+## 📂 Estructura del proyecto
+
