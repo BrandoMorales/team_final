@@ -6,9 +6,9 @@ import SearchFilter from './componentes/SearchFilter'
 import TodoList from './componentes/TodoList'
 import "../src/index.css";
 
-const STORAGE_KEY = 'team-todo-tasks-v1'
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
-function App() {
+function App() { // eslint-disable-line
   const [user, setUser] = useState(null)
   const [showRegister, setShowRegister] = useState(false)
   const [tasks, setTasks] = useState([])
@@ -17,42 +17,109 @@ function App() {
   const [filterAuthor, setFilterAuthor] = useState('')
 
   useEffect(() => {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    if (raw) {
+    // Cargar tareas iniciales desde la API
+    const fetchTasks = async () => {
       try {
-        setTasks(JSON.parse(raw))
-      } catch (e) {
-        console.error('JSON parse error', e)
+        const response = await fetch(`${API_URL}/tasks?_sort=createdAt&_order=desc`)
+        if (!response.ok) throw new Error('Error al cargar tareas')
+        const data = await response.json()
+        setTasks(data)
+      } catch (error) {
+        console.error(error)
+      } finally {
+        setLoading(false)
       }
     }
-    const t = setTimeout(() => setLoading(false), 350)
-    return () => clearTimeout(t)
+    fetchTasks()
   }, [])
 
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks))
-  }, [tasks])
+  async function handleLogin(credentials) {
+    try {
+      const response = await fetch(`${API_URL}/users?name=${credentials.name}&password=${credentials.password}`)
+      const data = await response.json()
+      if (data.length > 0) {
+        setUser(data[0])
+      } else {
+        alert('Usuario o contraseña incorrectos.')
+      }
+    } catch (error) {
+      console.error('Error en el login:', error)
+      alert('No se pudo conectar con el servidor.')
+    }
+  }
 
-  function handleAdd(taskText) {
+  async function handleRegister(credentials) {
+    try {
+      // Verificar si el usuario ya existe
+      const checkResponse = await fetch(`${API_URL}/users?name=${credentials.name}`)
+      const existingUsers = await checkResponse.json()
+      if (existingUsers.length > 0) {
+        alert('El nombre de usuario ya está en uso.')
+        return
+      }
+
+      // Crear nuevo usuario
+      const response = await fetch(`${API_URL}/users`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials)
+      })
+      const newUser = await response.json()
+      setUser(newUser)
+      setShowRegister(false)
+    } catch (error) {
+      console.error('Error en el registro:', error)
+      alert('No se pudo registrar el usuario.')
+    }
+  }
+
+  async function handleAdd(taskText) {
     if (!user) return
     const newTask = {
-      id: Date.now().toString(),
       author: user.name,
       text: taskText,
       completed: false,
       createdAt: new Date().toISOString(),
     }
-    setTasks(prev => [newTask, ...prev])
+    const response = await fetch(`${API_URL}/tasks`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newTask)
+    })
+    const addedTask = await response.json()
+    setTasks(prev => [addedTask, ...prev])
   }
 
-  function handleToggle(id) {
-    setTasks(prev =>
-      prev.map(t => (t.id === id ? { ...t, completed: !t.completed } : t))
-    )
+  async function handleToggle(id) {
+    const taskToToggle = tasks.find(t => t.id === id)
+    if (!taskToToggle) return
+
+    const updatedTask = { ...taskToToggle, completed: !taskToToggle.completed }
+
+    await fetch(`${API_URL}/tasks/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedTask)
+    })
+    setTasks(prev => prev.map(t => (t.id === id ? updatedTask : t)))
   }
 
-  function handleDelete(id) {
+  async function handleDelete(id) {
+    await fetch(`${API_URL}/tasks/${id}`, { method: 'DELETE' })
     setTasks(prev => prev.filter(t => t.id !== id))
+  }
+
+  async function handleEdit(id, newText) {
+    const taskToEdit = tasks.find(t => t.id === id)
+    if (!taskToEdit) return
+
+    const updatedTask = { ...taskToEdit, text: newText }
+    await fetch(`${API_URL}/tasks/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedTask)
+    })
+    setTasks(prev => prev.map(t => (t.id === id ? { ...t, text: newText } : t)));
   }
 
   function handleLogout() {
@@ -89,11 +156,11 @@ function App() {
         <div className="app-card">
           {showRegister ? (
             <Register 
-              onRegister={(u) => { setUser(u); setShowRegister(false); }} 
+              onRegister={handleRegister}
               onBack={() => setShowRegister(false)}
             />
           ) : (
-            <Login onLogin={setUser} onShowRegister={() => setShowRegister(true)} />
+            <Login onLogin={handleLogin} onShowRegister={() => setShowRegister(true)} />
           )}
         </div>
       ) : (
@@ -122,6 +189,7 @@ function App() {
                 tasks={filtered}
                 onToggle={handleToggle}
                 onDelete={handleDelete}
+                onEdit={handleEdit}
               />
             )}
           </div>
@@ -129,7 +197,7 @@ function App() {
       )}
 
       <footer className="app-footer">
-        Proyecto Team To-Do — Guardado en localStorage
+        Proyecto Team To-Do — Conectado a un Backend Simulado
       </footer>
     </div>
   )

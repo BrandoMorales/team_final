@@ -1,4 +1,15 @@
-export default function TodoItem({ task, onToggle, onDelete }) {
+import { useState } from "react";
+
+export default function TodoItem({ task, onToggle, onDelete, onEdit }) {
+  const [editing, setEditing] = useState(false);
+  const [editText, setEditText] = useState(task.text);
+
+  function handleEditSave() {
+    if (editText.trim() === "") return;
+    onEdit(task.id, editText.trim());
+    setEditing(false);
+  }
+
   return (
     <div className="todo-item">
       <input
@@ -8,16 +19,34 @@ export default function TodoItem({ task, onToggle, onDelete }) {
       />
       <div className="todo-content">
         <div className="todo-author">{task.author}</div>
-        <div className={`todo-text ${task.completed ? "todo-completed" : ""}`}>
-          {task.text}
-        </div>
+        {editing ? (
+          <input
+            className="todo-edit-input"
+            value={editText}
+            onChange={e => setEditText(e.target.value)}
+            onKeyDown={e => { if (e.key === "Enter") handleEditSave(); }}
+            autoFocus
+          />
+        ) : (
+          <div className={`todo-text ${task.completed ? "todo-completed" : ""}`}>
+            {task.text}
+          </div>
+        )}
         <div className="todo-date">
           {new Date(task.createdAt).toLocaleString()}
         </div>
       </div>
-      <button className="todo-delete" onClick={() => onDelete(task.id)}>
-        🗑
-      </button>
+      {editing ? (
+        <>
+          <button className="todo-save" onClick={handleEditSave}>Guardar</button>
+          <button className="todo-cancel" onClick={() => { setEditing(false); setEditText(task.text); }}>Cancelar</button>
+        </>
+      ) : (
+        <>
+          <button className="todo-edit" onClick={() => setEditing(true)}>✏️</button>
+          <button className="todo-delete" onClick={() => onDelete(task.id)}>🗑</button>
+        </>
+      )}
     </div>
-  )
+  );
 }

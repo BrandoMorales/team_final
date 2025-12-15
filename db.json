@@ -1,0 +1,41 @@
+{
+  "tasks": [
+    {
+      "id": "1700000000000",
+      "author": "Alice",
+      "text": "Configurar el backend simulado con json-server",
+      "completed": true,
+      "createdAt": "2023-11-14T22:13:20.000Z"
+    },
+    {
+      "id": "1700000000001",
+      "author": "Bob",
+      "text": "Refactorizar el componente App.jsx para usar fetch",
+      "completed": false,
+      "createdAt": "2023-11-14T22:13:21.000Z"
+    },
+    {
+      "id": "1afe",
+      "author": "brandon@gm",
+      "text": "hola",
+      "completed": false,
+      "createdAt": "2025-12-15T13:51:45.542Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "Alice",
+      "password": "password123"
+    },
+    {
+      "id": "2",
+      "name": "Bob",
+      "password": "password123"
+    },
+    {
+      "id": "9c98",
+      "name": "brandon@gm"
+    }
+  ]
+}
