@@ -141,35 +141,33 @@ npm run preview  # Previsualiza el build
 
 ---
 
-## 🔐 Política de Privacidad y Uso del Proyecto
+🔐 Política de Privacidad y Uso del Proyecto
 
-Este proyecto ha sido desarrollado **exclusivamente con fines educativos y académicos**.
+Este proyecto ha sido desarrollado exclusivamente con fines educativos y académicos. El código proporcionado puede ser clonado, reutilizado y modificado únicamente para prácticas educativas, aprendizaje personal o proyectos académicos. No está permitido su uso con fines comerciales sin la autorización expresa del autor.
 
-### 📌 Condiciones de Uso
+📌 Condiciones de Uso
 
-* El código puede ser **clonado, reutilizado y modificado** únicamente para:
+Este proyecto está disponible solo para fines educativos.
 
-  * Prácticas educativas
-  * Aprendizaje personal
-  * Proyectos académicos
+No se permite su uso comercial sin el consentimiento del autor.
 
-* **No está permitido** el uso comercial del proyecto ni de partes del mismo sin autorización expresa del autor.
+Las modificaciones realizadas por los usuarios del proyecto son de su responsabilidad, y deben ser respetuosas con los términos aquí establecidos.
 
-* Cualquier persona que clone este repositorio **es responsable de las modificaciones que realice**, así como del uso que le dé al software.
+🛡️ Privacidad de Datos
 
-### 🛡️ Privacidad de Datos
+Este proyecto no almacena ni recopila datos personales reales.
 
-* Este proyecto **no almacena datos personales reales**.
-* La información utilizada en el sistema (usuarios, tareas, credenciales) es **simulada o de prueba**.
-* No se recopila, vende ni comparte información personal con terceros.
+Los datos de prueba utilizados en el sistema (usuarios, tareas, credenciales) son simulados o ficticios.
 
-Al clonar o utilizar este proyecto, aceptas estas condiciones.
+El proyecto no comparte ni vende datos personales a terceros.
+
+Al clonar o utilizar este proyecto, el usuario acepta las condiciones anteriores.
 
 ---
 
 ## 👨‍💻 Autor
 
-Proyecto desarrollado por **Brandon Felipe Morales Herrera** como parte de un proyecto final de desarrollo web.
+Proyecto desarrollado por **Brandon Morales y Andres Salas** como parte de un proyecto final de desarrollo web.
 
 ---
 
