@@ -6,7 +6,11 @@ import SearchFilter from './componentes/SearchFilter'
 import TodoList from './componentes/TodoList'
 import "./index.css";
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const API_URL = import.meta.env.VITE_API_URL;
+
+if (!API_URL) {
+  console.error("❌ VITE_API_URL no está definida. Revisa el archivo .env o Netlify.");
+}
 
 function App() { // eslint-disable-line
   const [user, setUser] = useState(null)
@@ -38,7 +42,9 @@ function App() { // eslint-disable-line
   async function handleLogin(credentials) {
     setError(null);
     try {
-      const response = await fetch(`${API_URL}/users?name=${credentials.name}&password=${credentials.password}`)
+      const response = await fetch(
+        `${API_URL}/users?name=${credentials.name}&password=${credentials.password}`
+      )
       const data = await response.json()
       if (data.length > 0) {
         setUser(data[0])
@@ -63,12 +69,17 @@ function App() { // eslint-disable-line
       }
 
       // Crear nuevo usuario
-      const newUserPayload = { name: credentials.name, password: credentials.password };
+      const newUserPayload = {
+        name: credentials.name,
+        password: credentials.password
+      };
+
       const response = await fetch(`${API_URL}/users`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newUserPayload)
       })
+
       const newUser = await response.json()
       setUser(newUser)
       setShowRegister(false)
@@ -88,12 +99,15 @@ function App() { // eslint-disable-line
         completed: false,
         createdAt: new Date().toISOString(),
       }
+
       const response = await fetch(`${API_URL}/tasks`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newTask)
       })
-      if (!response.ok) throw new Error('No se pudo añadir la tarea.');
+
+      if (!response.ok) throw new Error('No se pudo añadir la tarea.')
+
       const addedTask = await response.json()
       setTasks(prev => [addedTask, ...prev])
     } catch (err) {
@@ -106,13 +120,19 @@ function App() { // eslint-disable-line
     if (!taskToToggle) return
     setError(null);
     try {
-      const updatedTaskPayload = { ...taskToToggle, completed: !taskToToggle.completed }
+      const updatedTaskPayload = {
+        ...taskToToggle,
+        completed: !taskToToggle.completed
+      }
+
       const response = await fetch(`${API_URL}/tasks/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedTaskPayload)
       })
-      if (!response.ok) throw new Error('No se pudo actualizar la tarea.');
+
+      if (!response.ok) throw new Error('No se pudo actualizar la tarea.')
+
       const returnedTask = await response.json();
       setTasks(prev => prev.map(t => (t.id === id ? returnedTask : t)))
     } catch (err) {
@@ -124,7 +144,7 @@ function App() { // eslint-disable-line
     setError(null);
     try {
       const response = await fetch(`${API_URL}/tasks/${id}`, { method: 'DELETE' })
-      if (!response.ok) throw new Error('No se pudo eliminar la tarea.');
+      if (!response.ok) throw new Error('No se pudo eliminar la tarea.')
       setTasks(prev => prev.filter(t => t.id !== id))
     } catch (err) {
       setError(err.message);
@@ -137,12 +157,15 @@ function App() { // eslint-disable-line
     setError(null);
     try {
       const updatedTaskPayload = { ...taskToEdit, text: newText }
+
       const response = await fetch(`${API_URL}/tasks/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedTaskPayload)
       })
-      if (!response.ok) throw new Error('No se pudo editar la tarea.');
+
+      if (!response.ok) throw new Error('No se pudo editar la tarea.')
+
       const returnedTask = await response.json();
       setTasks(prev => prev.map(t => (t.id === id ? returnedTask : t)));
     } catch (err) {
@@ -162,7 +185,8 @@ function App() { // eslint-disable-line
       q === '' ||
       t.text.toLowerCase().includes(q) ||
       t.author.toLowerCase().includes(q)
-    const matchesAuthor = filterAuthor === '' || t.author === filterAuthor
+    const matchesAuthor =
+      filterAuthor === '' || t.author === filterAuthor
     return matchesQuery && matchesAuthor
   })
 
@@ -188,7 +212,10 @@ function App() { // eslint-disable-line
               onBack={() => setShowRegister(false)}
             />
           ) : (
-            <Login onLogin={handleLogin} onShowRegister={() => setShowRegister(true)} />
+            <Login
+              onLogin={handleLogin}
+              onShowRegister={() => setShowRegister(true)}
+            />
           )}
         </div>
       ) : (
@@ -199,6 +226,7 @@ function App() { // eslint-disable-line
               <button onClick={() => setError(null)}>Cerrar</button>
             </div>
           )}
+
           <div className="app-card">
             <CreateTask onAdd={handleAdd} />
           </div>
