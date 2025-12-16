@@ -22,6 +22,15 @@ function App() { // eslint-disable-line
   const [error, setError] = useState(null)
 
   useEffect(() => {
+    // Comprobar si hay un usuario en localStorage al cargar la app
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []); // El array vacío asegura que se ejecute solo una vez al montar
+
+
+  useEffect(() => {
     // Cargar tareas iniciales desde la API
     const fetchTasks = async () => {
       try {
@@ -48,6 +57,8 @@ function App() { // eslint-disable-line
       const data = await response.json()
       if (data.length > 0) {
         setUser(data[0])
+        // Guardar usuario en localStorage para persistir la sesión
+        localStorage.setItem('user', JSON.stringify(data[0]));
       } else {
         setError('Usuario o contraseña incorrectos.')
       }
@@ -175,6 +186,8 @@ function App() { // eslint-disable-line
 
   function handleLogout() {
     setUser(null)
+    // Limpiar el usuario de localStorage al cerrar sesión
+    localStorage.removeItem('user');
   }
 
   const authors = Array.from(new Set(tasks.map(t => t.author)))

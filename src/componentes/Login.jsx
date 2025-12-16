@@ -8,12 +8,9 @@ export default function Login({ onLogin, onShowRegister }) {
 
   function submit(e) {
     e.preventDefault();
-    const trimmed = name.trim();
-    if (!trimmed || !password) return alert("Escribe usuario y contraseña");
-    const users = JSON.parse(localStorage.getItem("users") || "[]");
-    const user = users.find(u => u.name === trimmed && u.password === password);
-    if (!user) return alert("Usuario o contraseña incorrectos");
-    onLogin({ name: trimmed });
+    const trimmedName = name.trim();
+    if (!trimmedName || !password) return alert("Escribe usuario y contraseña");
+    onLogin({ name: trimmedName, password: password });
   }
 
 
